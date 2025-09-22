@@ -22,4 +22,4 @@ It ensures that sellers still receive their desired net amount after Shopee's de
 Just open the `index.html` file in your browser.
 
 ## Author
-© 2025 Wahyu Okta
+© 2025 Wahyu
