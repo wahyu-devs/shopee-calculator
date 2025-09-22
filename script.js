@@ -31,7 +31,7 @@ function hitung() {
 
     document.getElementById("output").style.display = "block";
     document.getElementById("output").innerHTML = `
-    <b>Harga Final yang Dipasang:</b> 
+    <div class="judul-harga-final"><b>Harga Jual di Shopee:</b></div> 
     <div class="harga-final">${formatRupiah(hargaBulat)}</div>
     <div class="potongan">
       <b>Simulasi Potongan:</b><br>
