@@ -1,7 +1,6 @@
 # Shopee Price Calculator
 
-This is a simple responsive web app built with **HTML, CSS, and JavaScript** to help sellers calculate the correct product price to post on **Shopee**.  
-It ensures that sellers still receive their desired net amount after Shopee's deductions.
+This is a simple responsive web app built with **HTML, CSS, and JavaScript** to help sellers calculate the correct product price to post on **Shopee**. It ensures that sellers still receive their desired net amount after Shopee's deductions.
 
 ## Features
 - Input desired net price in Indonesian Rupiah.
