@@ -18,13 +18,14 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     max-width: 420px;
     width: 100%;
-    margin: 0 15px; /* kasih spasi kiri-kanan */
-    box-sizing: border-box; /* biar padding ikut perhitungan lebar */
+    margin: 0 15px;
+    box-sizing: border-box;
 }
 
 
 h2 {
     text-align: center;
+    margin-top: 20px;
     margin-bottom: 20px;
     color: #ff5722;
     font-size: 1.5rem;
@@ -49,6 +50,7 @@ input {
 
 button {
     margin-top: 20px;
+    margin-bottom: 20px;
     width: 100%;
     padding: 12px;
     background: #ff5722;
@@ -64,7 +66,7 @@ button:hover {
 }
 
 .result {
-    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 12px;
     background: #f9f9f9;
     border-left: 5px solid #ff5722;
