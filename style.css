@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.container {
+    background: white;
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 420px;
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff5722;
+    font-size: 1.5rem;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+    font-size: 0.95rem;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #e64a19;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 12px;
+    background: #f9f9f9;
+    border-left: 5px solid #ff5722;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.harga-final {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #ff5722;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.potongan {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.potongan b {
+    color: #333;
+}
+
+/* Responsive untuk layar kecil */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px 20px;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    input,
+    button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .harga-final {
+        font-size: 1.4rem;
+    }
+}
