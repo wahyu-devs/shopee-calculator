@@ -91,6 +91,7 @@ button:hover {
     margin-top: 10px;
     font-size: 0.9rem;
     color: #555;
+    line-height: 25px;
 }
 
 .potongan b {
