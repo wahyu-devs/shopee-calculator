@@ -22,15 +22,17 @@ function hitung() {
 
   const BIAYA_PROSES = 1250;
   const ADMIN_RATE = 0.0825; // 8.25%
+  const SERVICE_RATE = 0.055; // 5.5%
 
   // Hitungan dasar
-  let hargaFinal = (bersih + BIAYA_PROSES) / (1 - ADMIN_RATE); // 0.9175
+  let hargaFinal = (bersih + BIAYA_PROSES) / (1 - ADMIN_RATE - SERVICE_RATE); // 0.8625
   let hargaBulat = Math.ceil(hargaFinal / 100) * 100;
 
   // Simulasi potongan
   let admin = hargaBulat * ADMIN_RATE;
+  let layanan = hargaBulat * SERVICE_RATE;
   let proses = BIAYA_PROSES;
-  let diterima = hargaBulat - admin - proses;
+  let diterima = hargaBulat - admin - layanan - proses;
 
   document.getElementById("output").style.display = "block";
   document.getElementById("output").innerHTML = `
@@ -39,6 +41,7 @@ function hitung() {
     <div class="potongan">
       <b>Simulasi Potongan:</b><br>
       - Biaya Admin (8.25%): ${formatRupiah(Math.round(admin))} <br>
+      - Biaya Layanan (5.5%): ${formatRupiah(Math.round(layanan))} <br>
       - Biaya Proses: ${formatRupiah(proses)} <br>
       - Uang Bersih Diterima: <b>${formatRupiah(Math.round(diterima))}</b>
     </div>
