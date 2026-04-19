@@ -580,7 +580,8 @@ a {
     body {
         padding: 0;
         justify-content: flex-start;
-        background: var(--surface);
+        align-items: stretch;
+        background: var(--bg);
     }
 
     .container {
@@ -589,7 +590,8 @@ a {
         flex-direction: column;
         width: 100%;
         max-width: none;
-        padding: calc(30px + env(safe-area-inset-top)) 28px 20px;
+        padding: 0 20px 14px;
+        background: var(--bg);
         border: 0;
         border-radius: 0;
         box-shadow: none;
@@ -597,49 +599,69 @@ a {
 
     #calculator-form {
         flex: 1;
-        gap: 22px;
+        gap: 14px;
     }
 
     .app-header {
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        justify-content: flex-start;
         gap: 10px;
-        margin-bottom: 30px;
+        margin: 0 -20px 14px;
+        padding: calc(14px + env(safe-area-inset-top)) 20px 14px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
     }
 
     .app-icon {
-        width: 34px;
-        height: 34px;
+        width: 32px;
+        height: 32px;
     }
 
     h1 {
-        font-size: 1.16rem;
+        font-size: 1.08rem;
         font-weight: 800;
+        text-align: left;
     }
 
     label {
         margin-bottom: 6px;
-        font-size: 0.94rem;
+        font-size: 0.92rem;
         line-height: 1.3;
     }
 
     .helper {
-        margin-bottom: 14px;
+        margin-bottom: 12px;
         font-size: 0.9rem;
         line-height: 1.45;
     }
 
+    .field-group {
+        margin: 0 -20px;
+        padding: 18px 20px 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+    }
+
     .amount-field {
-        min-height: 48px;
+        min-height: 52px;
+        background: #fafbfc;
     }
 
     input {
-        min-height: 46px;
+        min-height: 50px;
         padding-top: 10px;
         padding-bottom: 10px;
     }
 
     .fee-summary {
+        margin: 0 -20px;
+        padding: 16px 20px;
+        background: var(--surface);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
         gap: 8px;
-        margin-top: 0;
     }
 
     .fee-chips {
@@ -647,8 +669,9 @@ a {
     }
 
     .fee-chip {
-        min-height: 50px;
+        min-height: 52px;
         padding: 7px 6px;
+        background: #fafbfc;
         font-size: 0.73rem;
     }
 
@@ -659,7 +682,8 @@ a {
 
     .fee-toggle {
         width: 50px;
-        min-height: 50px;
+        min-height: 52px;
+        background: #fafbfc;
         font-size: 0.9rem;
     }
 
@@ -671,9 +695,29 @@ a {
         display: block;
     }
 
+    .fee-editor {
+        margin: -14px -20px 0;
+        padding: 16px 20px 18px;
+        background: var(--surface);
+        border: 0;
+        border-bottom: 1px solid var(--line);
+        border-radius: 0;
+    }
+
+    .fee-grid {
+        gap: 12px;
+    }
+
+    .fee-field input {
+        background: #fafbfc;
+    }
+
     .result {
-        margin-top: 0;
-        padding-top: 18px;
+        margin: 0 -20px;
+        padding: 18px 20px;
+        background: var(--surface);
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
     }
 
     .result-label {
@@ -699,10 +743,11 @@ a {
     }
 
     .primary-button {
-        min-height: 48px;
-        margin-top: 0;
+        min-height: 52px;
+        margin-top: 2px;
         font-size: 0.94rem;
         font-weight: 700;
+        box-shadow: 0 8px 18px rgba(255, 87, 34, 0.18);
     }
 
     .empty-state {
@@ -710,10 +755,11 @@ a {
         flex: 1 1 auto;
         min-height: 168px;
         place-items: center;
-        padding: 18px;
-        background: #fafbfc;
-        border: 1px dashed var(--line-strong);
-        border-radius: 8px;
+        margin: 0 -20px;
+        padding: 18px 20px;
+        background: var(--bg);
+        border: 0;
+        border-radius: 0;
         color: var(--muted);
         text-align: center;
     }
@@ -752,7 +798,7 @@ a {
         width: 100%;
         margin-top: auto;
         padding: 7px 20px calc(7px + env(safe-area-inset-bottom));
-        background: var(--bg);
+        background: var(--surface);
         border-top: 1px solid var(--line);
         font-size: 0.74rem;
         line-height: 1.2;
