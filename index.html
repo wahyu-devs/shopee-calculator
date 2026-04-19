@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/icon-app.png">
     <title>Kalkulator Harga Shopee</title>
-    <link rel="stylesheet" href="style.css?v=mobile-app-4">
+    <link rel="stylesheet" href="style.css?v=mobile-app-5">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <form id="calculator-form" novalidate>
             <div class="field-group">
                 <label for="bersih">Target Uang Bersih</label>
-                <p class="helper" id="bersih-helper">Nominal bersih setelah potongan Shopee.</p>
+                <p class="helper" id="bersih-helper">Nominal bersih setelah potongan biaya.</p>
                 <div class="amount-field" id="amount-field">
                     <span class="currency-prefix">Rp</span>
                     <input type="text" id="bersih" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-describedby="bersih-helper bersih-error" aria-invalid="false">
@@ -38,6 +38,10 @@
             </div>
 
             <section class="fee-summary" aria-label="Asumsi biaya Shopee">
+                <div class="fee-summary-copy">
+                    <p class="fee-summary-title">Potongan Biaya</p>
+                    <p class="fee-summary-helper">Biaya yang dipotong dari harga jual.</p>
+                </div>
                 <div class="fee-chips">
                     <span class="fee-chip">Admin <b id="admin-chip">8,25%</b></span>
                     <span class="fee-chip">Layanan <b id="service-chip">5,5%</b></span>
