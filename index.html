@@ -46,18 +46,22 @@
             <div class="fee-editor" id="fee-editor" hidden>
                 <div class="fee-grid">
                     <label class="fee-field" for="admin-rate">
-                        <span>Biaya Admin (%)</span>
+                        <span class="fee-label fee-label-desktop">Admin (%)</span>
+                        <span class="fee-label fee-label-mobile">Biaya Admin (%)</span>
                         <input type="text" id="admin-rate" inputmode="decimal" value="8,25">
                     </label>
                     <label class="fee-field" for="service-rate">
-                        <span>Biaya Layanan (%)</span>
+                        <span class="fee-label fee-label-desktop">Layanan (%)</span>
+                        <span class="fee-label fee-label-mobile">Biaya Layanan (%)</span>
                         <input type="text" id="service-rate" inputmode="decimal" value="5,5">
                     </label>
                     <label class="fee-field" for="process-fee">
-                        <span>Biaya Proses Pesanan (Rp)</span>
+                        <span class="fee-label fee-label-desktop">Proses (Rp)</span>
+                        <span class="fee-label fee-label-mobile">Biaya Proses Pesanan (Rp)</span>
                         <input type="text" id="process-fee" inputmode="numeric" value="1.250">
                     </label>
                 </div>
+                <button class="fee-save" type="button" id="save-fees">Simpan</button>
                 <p class="error-message" id="fee-error" aria-live="polite"></p>
             </div>
 
@@ -85,6 +89,12 @@
             </section>
 
             <button class="primary-button" id="primary-action" type="submit">Hitung Harga Jual</button>
+            <section id="empty-state" class="empty-state" aria-live="polite">
+                <div class="empty-state-content">
+                    <span class="empty-state-icon" aria-hidden="true">Rp</span>
+                    <p>Masukkan target, lalu hitung harga jual.</p>
+                </div>
+            </section>
             <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
         </form>
     </main>

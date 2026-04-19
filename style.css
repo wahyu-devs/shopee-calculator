@@ -82,7 +82,8 @@ h1 {
 }
 
 #calculator-form {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: var(--form-gap);
 }
 
@@ -96,7 +97,7 @@ label {
 .helper {
     margin: 0 0 var(--field-gap);
     color: var(--muted);
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     line-height: 1.45;
 }
 
@@ -174,8 +175,10 @@ input:focus {
 
 .toast {
     position: fixed;
-    right: 20px;
-    bottom: calc(20px + env(safe-area-inset-bottom));
+    top: calc(20px + env(safe-area-inset-top));
+    right: auto;
+    bottom: auto;
+    left: 50%;
     z-index: 10;
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
@@ -193,7 +196,7 @@ input:focus {
     font-weight: 700;
     line-height: 1.35;
     opacity: 0;
-    transform: translateY(10px);
+    transform: translate(-50%, -10px);
     transition: opacity 180ms ease, transform 180ms ease;
 }
 
@@ -241,7 +244,7 @@ input:focus {
 
 .toast.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
 }
 
 .toast.is-success {
@@ -366,7 +369,9 @@ input:focus {
 }
 
 .fee-toggle:hover {
+    background: #ffffff;
     border-color: var(--accent);
+    color: var(--accent);
 }
 
 .fee-editor {
@@ -393,11 +398,41 @@ input:focus {
     font-size: 0.8rem;
 }
 
+.fee-field .fee-label-mobile {
+    display: none;
+}
+
 .fee-field input {
     min-height: 44px;
     padding: 10px 11px;
     background: var(--surface);
     border: 1px solid var(--line-strong);
+}
+
+.fee-save {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 8px;
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 700;
+}
+
+.fee-save:hover {
+    background: #ffffff;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.fee-save:focus-visible {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.16);
+    outline: none;
 }
 
 .result {
@@ -486,6 +521,10 @@ input:focus {
     border-color: var(--accent-hover);
 }
 
+.empty-state {
+    display: none;
+}
+
 footer {
     margin-top: 14px;
     color: #6d747c;
@@ -507,8 +546,33 @@ a {
 }
 
 @media (min-width: 701px) {
+    .fee-editor {
+        padding: 14px;
+    }
+
     .fee-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: start;
+    }
+
+    .fee-field span {
+        margin-bottom: 7px;
+        font-size: 0.8rem;
+        line-height: 1.25;
+        white-space: nowrap;
+    }
+
+    .fee-field input {
+        min-height: 46px;
+        padding: 10px 12px;
+        font-size: 1rem;
+    }
+
+    .fee-save {
+        min-height: 42px;
+        margin-top: 14px;
+        padding: 9px 12px;
     }
 }
 
@@ -520,6 +584,9 @@ a {
     }
 
     .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
         width: 100%;
         max-width: none;
         padding: calc(30px + env(safe-area-inset-top)) 28px 28px;
@@ -529,6 +596,7 @@ a {
     }
 
     #calculator-form {
+        flex: 1;
         gap: 22px;
     }
 
@@ -555,7 +623,7 @@ a {
 
     .helper {
         margin-bottom: 14px;
-        font-size: 0.86rem;
+        font-size: 0.9rem;
         line-height: 1.45;
     }
 
@@ -595,6 +663,14 @@ a {
         font-size: 0.9rem;
     }
 
+    .fee-field .fee-label-desktop {
+        display: none;
+    }
+
+    .fee-field .fee-label-mobile {
+        display: block;
+    }
+
     .result {
         margin-top: 0;
         padding-top: 18px;
@@ -629,6 +705,49 @@ a {
         font-weight: 700;
     }
 
+    .empty-state {
+        display: grid;
+        flex: 1 1 auto;
+        min-height: 150px;
+        place-items: center;
+        padding: 18px;
+        background: #fafbfc;
+        border: 1px dashed var(--line-strong);
+        border-radius: 8px;
+        color: var(--muted);
+        text-align: center;
+    }
+
+    .empty-state-content {
+        display: grid;
+        place-items: center;
+        gap: 8px;
+    }
+
+    .empty-state[hidden] {
+        display: none;
+    }
+
+    .empty-state-icon {
+        display: inline-grid;
+        width: 40px;
+        height: 40px;
+        place-items: center;
+        background: var(--accent-soft);
+        border-radius: 50%;
+        color: var(--accent);
+        font-size: 0.92rem;
+        font-weight: 800;
+    }
+
+    .empty-state p {
+        max-width: 220px;
+        margin: 0;
+        font-size: 0.88rem;
+        font-weight: 700;
+        line-height: 1.45;
+    }
+
     footer {
         width: 100%;
         margin-top: auto;
@@ -638,6 +757,7 @@ a {
     }
 
     .toast {
+        top: auto;
         right: 50%;
         bottom: calc(18px + env(safe-area-inset-bottom));
         left: auto;

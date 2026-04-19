@@ -7,7 +7,7 @@ This is a simple responsive web app built with **HTML, CSS, and JavaScript** to 
 - Automatic formatting with thousands separator.
 - Calculates after pressing the main button.
 - Inline validation for empty or invalid amounts.
-- Visible and editable fee assumptions.
+- Visible, editable, and saved fee assumptions.
 - Copy the recommended selling price.
 - Calculates the final selling price considering:
   - Shopee admin fee (8.25%)

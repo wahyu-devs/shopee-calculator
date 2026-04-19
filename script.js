@@ -4,6 +4,8 @@ const DEFAULT_FEES = {
   processFee: 1250,
 };
 
+const STORAGE_KEY = "shopeeCalculatorFees";
+
 const elements = {
   form: document.getElementById("calculator-form"),
   amountInput: document.getElementById("bersih"),
@@ -15,6 +17,7 @@ const elements = {
   feeError: document.getElementById("fee-error"),
   feeEditor: document.getElementById("fee-editor"),
   feeToggle: document.getElementById("toggle-fees"),
+  saveFees: document.getElementById("save-fees"),
   adminChip: document.getElementById("admin-chip"),
   serviceChip: document.getElementById("service-chip"),
   processChip: document.getElementById("process-chip"),
@@ -24,6 +27,7 @@ const elements = {
   toastMessage: document.querySelector("#toast .toast-message"),
   toastClose: document.querySelector("#toast .toast-close"),
   output: document.getElementById("output"),
+  emptyState: document.getElementById("empty-state"),
   sellingPrice: document.getElementById("selling-price"),
   adminFee: document.getElementById("admin-fee"),
   serviceFee: document.getElementById("service-fee"),
@@ -31,6 +35,7 @@ const elements = {
   netReceived: document.getElementById("net-received"),
 };
 
+let savedFees = { ...DEFAULT_FEES };
 let lastResult = null;
 let copyResetTimer = 0;
 let toastTimer = 0;
@@ -55,6 +60,36 @@ function parseRupiah(value) {
 function parseDecimal(value) {
   const normalized = value.trim().replace(/\s/g, "").replace(",", ".");
   return normalized ? Number(normalized) : NaN;
+}
+
+function isValidFeeSet(fees) {
+  return (
+    fees &&
+    Number.isFinite(fees.adminRate) &&
+    Number.isFinite(fees.serviceRate) &&
+    Number.isFinite(fees.processFee) &&
+    fees.adminRate >= 0 &&
+    fees.serviceRate >= 0 &&
+    fees.processFee >= 0 &&
+    fees.adminRate + fees.serviceRate < 1
+  );
+}
+
+function loadStoredFees() {
+  try {
+    const storedFees = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return isValidFeeSet(storedFees) ? storedFees : { ...DEFAULT_FEES };
+  } catch (error) {
+    return { ...DEFAULT_FEES };
+  }
+}
+
+function saveStoredFees(fees) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(fees));
+  } catch (error) {
+    showToast("Biaya tersimpan untuk sesi ini.", "info");
+  }
 }
 
 function formatCurrencyInput(input) {
@@ -138,7 +173,26 @@ function updateFeeChips(fees) {
   elements.processChip.textContent = formatRupiah(fees.processFee);
 }
 
-function readFees(showError) {
+function syncFeeInputs(fees = savedFees) {
+  elements.adminInput.value = formatPercent(fees.adminRate);
+  elements.serviceInput.value = formatPercent(fees.serviceRate);
+  elements.processInput.value = fees.processFee.toLocaleString("id-ID");
+  setFeeError("");
+}
+
+function setFeeEditorOpen(isOpen) {
+  elements.feeToggle.setAttribute("aria-expanded", String(isOpen));
+  elements.feeToggle.setAttribute("aria-label", isOpen ? "Tutup biaya" : "Ubah biaya");
+  elements.feeEditor.hidden = !isOpen;
+
+  if (isOpen) {
+    syncFeeInputs();
+  } else {
+    setFeeError("");
+  }
+}
+
+function readFeeInputs(showError) {
   const adminPercent = parseDecimal(elements.adminInput.value);
   const servicePercent = parseDecimal(elements.serviceInput.value);
   const processFee = parseRupiah(elements.processInput.value);
@@ -171,19 +225,20 @@ function readFees(showError) {
   };
 
   setFeeError("");
-  updateFeeChips(fees);
   return fees;
 }
 
 function hideResult() {
   lastResult = null;
   elements.output.hidden = true;
+  elements.emptyState.hidden = false;
   setPrimaryMode(false);
 }
 
 function renderResult(result) {
   lastResult = result;
   elements.output.hidden = false;
+  elements.emptyState.hidden = true;
   elements.sellingPrice.textContent = formatRupiah(result.sellingPrice);
   elements.adminFee.textContent = `-${formatRupiah(result.adminFee)}`;
   elements.serviceFee.textContent = `-${formatRupiah(result.serviceFee)}`;
@@ -194,7 +249,7 @@ function renderResult(result) {
 
 function calculate(options = {}) {
   const amount = parseRupiah(elements.amountInput.value);
-  const fees = readFees(Boolean(options.showFeeError));
+  const fees = savedFees;
   setCopyStatus("");
 
   if (Number.isNaN(amount) || amount <= 0) {
@@ -203,12 +258,6 @@ function calculate(options = {}) {
       options.showAmountError ? "Isi target di atas Rp0." : "",
       Boolean(options.showAmountError),
     );
-    return false;
-  }
-
-  if (!fees) {
-    hideResult();
-    setAmountError("");
     return false;
   }
 
@@ -280,23 +329,32 @@ elements.amountInput.addEventListener("input", () => {
 elements.processInput.addEventListener("input", () => {
   formatCurrencyInput(elements.processInput);
   setFeeError("");
-  readFees(false);
-  hideResult();
 });
 
 [elements.adminInput, elements.serviceInput].forEach((input) => {
   input.addEventListener("input", () => {
     setFeeError("");
-    readFees(false);
-    hideResult();
   });
 });
 
 elements.feeToggle.addEventListener("click", () => {
   const isOpen = elements.feeToggle.getAttribute("aria-expanded") === "true";
-  elements.feeToggle.setAttribute("aria-expanded", String(!isOpen));
-  elements.feeToggle.setAttribute("aria-label", isOpen ? "Ubah biaya" : "Tutup biaya");
-  elements.feeEditor.hidden = isOpen;
+  setFeeEditorOpen(!isOpen);
+});
+
+elements.saveFees.addEventListener("click", () => {
+  const fees = readFeeInputs(true);
+
+  if (!fees) {
+    return;
+  }
+
+  savedFees = fees;
+  saveStoredFees(savedFees);
+  updateFeeChips(savedFees);
+  hideResult();
+  setFeeEditorOpen(false);
+  showToast("Biaya disimpan.", "success");
 });
 
 elements.toastClose.addEventListener("click", hideToast);
@@ -312,5 +370,7 @@ elements.form.addEventListener("submit", (event) => {
   calculate({ showAmountError: true, showFeeError: true });
 });
 
-updateFeeChips(DEFAULT_FEES);
+savedFees = loadStoredFees();
+syncFeeInputs(savedFees);
+updateFeeChips(savedFees);
 setPrimaryMode(false);
