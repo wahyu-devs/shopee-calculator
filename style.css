@@ -770,13 +770,9 @@ a {
     }
 
     .about-modal-credit {
-        display: inline-flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 3px;
+        display: block;
         width: 100%;
-        margin-top: 4px;
+        margin: 4px 0 0;
         color: var(--muted);
         font-size: 0.84rem;
         font-weight: 400;
