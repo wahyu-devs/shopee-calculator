@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/icon-app.png">
     <title>Kalkulator Harga Shopee</title>
@@ -11,17 +11,97 @@
 </head>
 
 <body>
-    <div class="container">
-        <h2>Kalkulator Harga Shopee</h2>
-        <label for="bersih">Masukkan Harga Bersih yang Diinginkan (Rp):</label>
-        <input type="text" id="bersih" inputmode="numeric" pattern="[0-9]*" placeholder="Contoh: 10.000"
-            oninput="formatInput(this)" onkeydown="if(event.key==='Enter'){hitung()}">
-        <button onclick="hitung()">Hitung Harga Jual</button>
-        <div id="output" class="result" style="display:none;"></div>
+    <main class="container">
+        <header class="app-header">
+            <img src="assets/icon.png" alt="" class="app-icon" aria-hidden="true">
+            <h1>Kalkulator Harga Shopee</h1>
+        </header>
+
+        <form id="calculator-form" novalidate>
+            <div class="field-group">
+                <label for="bersih">Target Uang Bersih</label>
+                <p class="helper" id="bersih-helper">Nominal bersih setelah potongan Shopee.</p>
+                <div class="amount-field" id="amount-field">
+                    <span class="currency-prefix">Rp</span>
+                    <input type="text" id="bersih" inputmode="numeric" pattern="[0-9]*" autocomplete="off" aria-describedby="bersih-helper bersih-error" aria-invalid="false">
+                </div>
+                <p class="error-message" id="bersih-error" aria-live="polite"></p>
+            </div>
+
+            <section class="fee-summary" aria-label="Asumsi biaya Shopee">
+                <div class="fee-chips">
+                    <span class="fee-chip">Admin <b id="admin-chip">8,25%</b></span>
+                    <span class="fee-chip">Layanan <b id="service-chip">5,5%</b></span>
+                    <span class="fee-chip">Proses <b id="process-chip">Rp1.250</b></span>
+                </div>
+                <button class="fee-toggle" type="button" id="toggle-fees" aria-expanded="false"
+                    aria-controls="fee-editor" aria-label="Ubah biaya">
+                    <svg class="settings-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M19.4 13.5c.1-.5.1-1 .1-1.5s0-1-.1-1.5l2-1.5-2-3.5-2.4 1a8.2 8.2 0 0 0-2.6-1.5L14 2h-4l-.4 2.5A8.2 8.2 0 0 0 7 6L4.6 5 2.6 8.5l2 1.5c-.1.5-.1 1-.1 1.5s0 1 .1 1.5l-2 1.5 2 3.5 2.4-1a8.2 8.2 0 0 0 2.6 1.5L10 22h4l.4-2.5A8.2 8.2 0 0 0 17 18l2.4 1 2-3.5-2-1.5ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z" />
+                    </svg>
+                </button>
+            </section>
+
+            <div class="fee-editor" id="fee-editor" hidden>
+                <div class="fee-grid">
+                    <label class="fee-field" for="admin-rate">
+                        <span>Biaya Admin (%)</span>
+                        <input type="text" id="admin-rate" inputmode="decimal" value="8,25">
+                    </label>
+                    <label class="fee-field" for="service-rate">
+                        <span>Biaya Layanan (%)</span>
+                        <input type="text" id="service-rate" inputmode="decimal" value="5,5">
+                    </label>
+                    <label class="fee-field" for="process-fee">
+                        <span>Biaya Proses Pesanan (Rp)</span>
+                        <input type="text" id="process-fee" inputmode="numeric" value="1.250">
+                    </label>
+                </div>
+                <p class="error-message" id="fee-error" aria-live="polite"></p>
+            </div>
+
+            <section id="output" class="result" hidden aria-live="polite">
+                <p class="result-label">Harga Jual Minimum</p>
+                <div class="harga-final" id="selling-price">Rp0</div>
+                <div class="summary-list">
+                    <div class="summary-row">
+                        <span>Biaya Admin</span>
+                        <b id="admin-fee">Rp0</b>
+                    </div>
+                    <div class="summary-row">
+                        <span>Biaya Layanan</span>
+                        <b id="service-fee">Rp0</b>
+                    </div>
+                    <div class="summary-row">
+                        <span>Biaya Proses Pesanan</span>
+                        <b id="process-cost">Rp0</b>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Bersih Diterima</span>
+                        <b id="net-received">Rp0</b>
+                    </div>
+                </div>
+            </section>
+
+            <button class="primary-button" id="primary-action" type="submit">Hitung Harga Jual</button>
+            <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+        </form>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden>
+        <span class="toast-icon" aria-hidden="true"></span>
+        <span class="toast-message"></span>
+        <button class="toast-close" type="button" aria-label="Tutup pesan">&times;</button>
     </div>
 
     <footer>
-        © 2026 Crafted by <a href="https://wahyu-devs.github.io/portfolio/"><b>Wahyu</b></a>
+        &copy; 2026 Made with
+        <svg class="heart-icon" viewBox="0 0 24 24" role="img" aria-label="love">
+            <path
+                d="M12 21s-6.9-4.5-9.4-8.6C.9 9.5 1.7 5.9 4.5 4.3 6.7 3 9.3 3.5 12 6.1 14.7 3.5 17.3 3 19.5 4.3c2.8 1.6 3.6 5.2 1.9 8.1C18.9 16.5 12 21 12 21z" />
+        </svg>
+        by <a href="https://wahyu-devs.github.io/portfolio/"><b>Wahyu</b></a>
     </footer>
 
     <script src="script.js"></script>

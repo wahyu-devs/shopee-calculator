@@ -5,6 +5,10 @@ This is a simple responsive web app built with **HTML, CSS, and JavaScript** to 
 ## Features
 - Input desired net price in Indonesian Rupiah.
 - Automatic formatting with thousands separator.
+- Calculates after pressing the main button.
+- Inline validation for empty or invalid amounts.
+- Visible and editable fee assumptions.
+- Copy the recommended selling price.
 - Calculates the final selling price considering:
   - Shopee admin fee (8.25%)
   - Service fee (5.5%)
@@ -15,11 +19,12 @@ This is a simple responsive web app built with **HTML, CSS, and JavaScript** to 
 
 ## Usage
 1. Enter the net amount you want to receive.
-2. The app calculates and displays the final price to post on Shopee.
-3. The simulation shows admin fee, service fee, processing fee, and the final net you’ll receive.
+2. Press the main button to calculate and display the final price to post on Shopee.
+3. Adjust the fee assumptions if your seller scheme is different.
+4. Copy the final selling price when the result appears.
 
 ## Demo
 Just open the `index.html` file in your browser.
 
 ## Author
-© 2025 Wahyu
+© 2026 Wahyu
