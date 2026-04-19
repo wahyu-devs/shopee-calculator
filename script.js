@@ -8,6 +8,11 @@ const STORAGE_KEY = "shopeeCalculatorFees";
 
 const elements = {
   form: document.getElementById("calculator-form"),
+  aboutModal: document.getElementById("about-modal"),
+  aboutModalClose: document.getElementById("about-modal-close"),
+  mobileMenu: document.getElementById("mobile-menu"),
+  mobileMenuToggle: document.getElementById("mobile-menu-toggle"),
+  openAbout: document.getElementById("open-about"),
   amountInput: document.getElementById("bersih"),
   amountField: document.getElementById("amount-field"),
   amountError: document.getElementById("bersih-error"),
@@ -41,6 +46,16 @@ let copyResetTimer = 0;
 let toastTimer = 0;
 let toastHideTimer = 0;
 let lastToastMessage = "";
+
+function setMobileMenuOpen(isOpen) {
+  elements.mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+  elements.mobileMenuToggle.setAttribute("aria-label", isOpen ? "Tutup menu" : "Buka menu");
+  elements.mobileMenu.hidden = !isOpen;
+}
+
+function setAboutModalOpen(isOpen) {
+  elements.aboutModal.hidden = !isOpen;
+}
 
 function formatRupiah(value) {
   return `Rp${Math.round(value).toLocaleString("id-ID")}`;
@@ -358,6 +373,55 @@ elements.saveFees.addEventListener("click", () => {
 });
 
 elements.toastClose.addEventListener("click", hideToast);
+
+elements.mobileMenuToggle.addEventListener("click", (event) => {
+  event.stopPropagation();
+  const isOpen = elements.mobileMenuToggle.getAttribute("aria-expanded") === "true";
+  setMobileMenuOpen(!isOpen);
+});
+
+elements.mobileMenu.addEventListener("click", (event) => {
+  event.stopPropagation();
+});
+
+elements.openAbout.addEventListener("click", () => {
+  setMobileMenuOpen(false);
+  setAboutModalOpen(true);
+});
+
+elements.aboutModalClose.addEventListener("click", () => {
+  setAboutModalOpen(false);
+  elements.mobileMenuToggle.focus();
+});
+
+elements.aboutModal.addEventListener("click", (event) => {
+  if (event.target === elements.aboutModal) {
+    setAboutModalOpen(false);
+  }
+});
+
+elements.aboutModal.querySelector(".about-modal-panel").addEventListener("click", (event) => {
+  event.stopPropagation();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !elements.aboutModal.hidden) {
+    setAboutModalOpen(false);
+    elements.mobileMenuToggle.focus();
+    return;
+  }
+
+  if (event.key === "Escape" && elements.mobileMenuToggle.getAttribute("aria-expanded") === "true") {
+    setMobileMenuOpen(false);
+    elements.mobileMenuToggle.focus();
+  }
+});
+
+document.addEventListener("click", () => {
+  if (elements.mobileMenuToggle.getAttribute("aria-expanded") === "true") {
+    setMobileMenuOpen(false);
+  }
+});
 
 elements.form.addEventListener("submit", (event) => {
   event.preventDefault();
