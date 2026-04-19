@@ -589,7 +589,7 @@ a {
         flex-direction: column;
         width: 100%;
         max-width: none;
-        padding: calc(30px + env(safe-area-inset-top)) 28px 28px;
+        padding: calc(30px + env(safe-area-inset-top)) 28px 20px;
         border: 0;
         border-radius: 0;
         box-shadow: none;
@@ -708,7 +708,7 @@ a {
     .empty-state {
         display: grid;
         flex: 1 1 auto;
-        min-height: 150px;
+        min-height: 168px;
         place-items: center;
         padding: 18px;
         background: #fafbfc;
@@ -751,9 +751,11 @@ a {
     footer {
         width: 100%;
         margin-top: auto;
-        padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+        padding: 7px 20px calc(7px + env(safe-area-inset-bottom));
         background: var(--bg);
         border-top: 1px solid var(--line);
+        font-size: 0.74rem;
+        line-height: 1.2;
     }
 
     .toast {
