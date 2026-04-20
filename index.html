@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/icon-app.png">
     <title>Kalkulator Shopee</title>
-    <link rel="stylesheet" href="style.css?v=mobile-app-7">
+    <link rel="stylesheet" href="style.css?v=mobile-app-10">
 </head>
 
 <body>
@@ -139,11 +139,22 @@
 
     <div class="about-modal" id="about-modal" role="dialog" aria-modal="true" aria-labelledby="about-title" hidden>
         <div class="about-modal-panel">
+            <span class="about-modal-handle" aria-hidden="true"></span>
             <button class="about-modal-close" id="about-modal-close" type="button" aria-label="Tutup About">&times;</button>
-            <h2 id="about-title">Tentang</h2>
-            <p class="about-modal-credit">
-                © 2026 Dibuat oleh <a href="https://wahyu-devs.github.io/portfolio/"><b>Wahyu</b></a>
-            </p>
+            <div class="about-modal-header">
+                <svg class="about-modal-header-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 17v-6" />
+                    <path d="M12 7h.01" />
+                    <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+                <h2 id="about-title">Tentang</h2>
+            </div>
+            <div class="about-modal-body">
+                <p>
+                    Aplikasi web untuk membantu Seller menghitung harga jual minimum agar target uang bersih tetap
+                    tercapai setelah potongan biaya Shopee. Dibuat oleh <a href="https://wahyu-devs.github.io/portfolio/"><b>Wahyu</b></a>.
+                </p>
+            </div>
         </div>
     </div>
 
