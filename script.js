@@ -11,8 +11,11 @@ const elements = {
   aboutModal: document.getElementById("about-modal"),
   aboutModalClose: document.getElementById("about-modal-close"),
   mobileMenu: document.getElementById("mobile-menu"),
+  mobileMenuBackdrop: document.getElementById("mobile-menu-backdrop"),
+  mobileMenuClose: document.getElementById("mobile-menu-close"),
   mobileMenuToggle: document.getElementById("mobile-menu-toggle"),
   openAbout: document.getElementById("open-about"),
+  resetForm: document.getElementById("reset-form"),
   amountInput: document.getElementById("bersih"),
   amountField: document.getElementById("amount-field"),
   amountError: document.getElementById("bersih-error"),
@@ -46,11 +49,39 @@ let copyResetTimer = 0;
 let toastTimer = 0;
 let toastHideTimer = 0;
 let lastToastMessage = "";
+let mobileMenuCloseTimer = 0;
 
 function setMobileMenuOpen(isOpen) {
-  elements.mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
-  elements.mobileMenuToggle.setAttribute("aria-label", isOpen ? "Tutup menu" : "Buka menu");
-  elements.mobileMenu.hidden = !isOpen;
+  const shouldOpen = isOpen && window.matchMedia("(max-width: 700px)").matches;
+
+  window.clearTimeout(mobileMenuCloseTimer);
+  elements.mobileMenuToggle.setAttribute("aria-expanded", String(shouldOpen));
+  elements.mobileMenuToggle.setAttribute("aria-label", shouldOpen ? "Tutup menu" : "Buka menu");
+
+  if (shouldOpen) {
+    elements.mobileMenu.hidden = false;
+    elements.mobileMenuBackdrop.hidden = false;
+    document.body.classList.add("is-mobile-menu-open");
+
+    window.requestAnimationFrame(() => {
+      if (elements.mobileMenuToggle.getAttribute("aria-expanded") === "true") {
+        elements.mobileMenu.classList.add("is-open");
+        elements.mobileMenuBackdrop.classList.add("is-open");
+      }
+    });
+    return;
+  }
+
+  elements.mobileMenu.classList.remove("is-open");
+  elements.mobileMenuBackdrop.classList.remove("is-open");
+  document.body.classList.remove("is-mobile-menu-open");
+
+  mobileMenuCloseTimer = window.setTimeout(() => {
+    if (elements.mobileMenuToggle.getAttribute("aria-expanded") === "false") {
+      elements.mobileMenu.hidden = true;
+      elements.mobileMenuBackdrop.hidden = true;
+    }
+  }, 180);
 }
 
 function setAboutModalOpen(isOpen) {
@@ -250,6 +281,17 @@ function hideResult() {
   setPrimaryMode(false);
 }
 
+function resetCalculatorForm() {
+  elements.amountInput.value = "";
+  setAmountError("");
+  setFeeError("");
+  setCopyStatus("");
+  syncFeeInputs(savedFees);
+  setFeeEditorOpen(false);
+  hideResult();
+  showToast("Form berhasil dikosongkan.", "success");
+}
+
 function renderResult(result) {
   lastResult = result;
   elements.output.hidden = false;
@@ -384,9 +426,23 @@ elements.mobileMenu.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 
+elements.mobileMenuBackdrop.addEventListener("click", () => {
+  setMobileMenuOpen(false);
+});
+
+elements.mobileMenuClose.addEventListener("click", () => {
+  setMobileMenuOpen(false);
+  elements.mobileMenuToggle.focus();
+});
+
 elements.openAbout.addEventListener("click", () => {
   setMobileMenuOpen(false);
   setAboutModalOpen(true);
+});
+
+elements.resetForm.addEventListener("click", () => {
+  setMobileMenuOpen(false);
+  resetCalculatorForm();
 });
 
 elements.aboutModalClose.addEventListener("click", () => {
@@ -419,6 +475,14 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("click", () => {
   if (elements.mobileMenuToggle.getAttribute("aria-expanded") === "true") {
+    setMobileMenuOpen(false);
+  }
+});
+
+window.addEventListener("resize", () => {
+  const isMenuOpen = elements.mobileMenuToggle.getAttribute("aria-expanded") === "true";
+
+  if (isMenuOpen && !window.matchMedia("(max-width: 700px)").matches) {
     setMobileMenuOpen(false);
   }
 });
