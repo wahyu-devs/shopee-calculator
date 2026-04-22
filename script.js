@@ -292,6 +292,12 @@ function resetCalculatorForm() {
   showToast("Form berhasil dikosongkan.", "success");
 }
 
+function dismissAmountKeyboard() {
+  if (document.activeElement === elements.amountInput) {
+    elements.amountInput.blur();
+  }
+}
+
 function renderResult(result) {
   lastResult = result;
   elements.output.hidden = false;
@@ -489,6 +495,7 @@ window.addEventListener("resize", () => {
 
 elements.form.addEventListener("submit", (event) => {
   event.preventDefault();
+  dismissAmountKeyboard();
 
   if (elements.primaryButton.dataset.action === "copy" && lastResult) {
     copySellingPrice();
