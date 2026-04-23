@@ -576,6 +576,27 @@ a {
 }
 
 @media (min-width: 701px) {
+    .container {
+        padding: 22px 24px 24px;
+    }
+
+    .app-header {
+        gap: 14px;
+        margin-bottom: 24px;
+    }
+
+    #calculator-form {
+        gap: 20px;
+    }
+
+    .fee-summary {
+        gap: 12px 8px;
+    }
+
+    .primary-button {
+        margin-top: 0;
+    }
+
     .fee-editor {
         padding: 14px;
     }
