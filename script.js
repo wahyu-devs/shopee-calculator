@@ -5,6 +5,7 @@ const DEFAULT_FEES = {
 };
 
 const STORAGE_KEY = "shopeeCalculatorFees";
+const THEME_STORAGE_KEY = "shopeeCalculatorTheme";
 
 const elements = {
   form: document.getElementById("calculator-form"),
@@ -34,6 +35,8 @@ const elements = {
   toast: document.getElementById("toast"),
   toastMessage: document.querySelector("#toast .toast-message"),
   toastClose: document.querySelector("#toast .toast-close"),
+  themeToggles: document.querySelectorAll("[data-theme-toggle]"),
+  themeLabels: document.querySelectorAll("[data-theme-label]"),
   output: document.getElementById("output"),
   emptyState: document.getElementById("empty-state"),
   sellingPrice: document.getElementById("selling-price"),
@@ -136,6 +139,48 @@ function saveStoredFees(fees) {
   } catch (error) {
     showToast("Biaya tersimpan untuk sesi ini.", "info");
   }
+}
+
+function loadStoredTheme() {
+  try {
+    const storedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+    return storedTheme === "dark" ? "dark" : "light";
+  } catch (error) {
+    return "light";
+  }
+}
+
+function saveStoredTheme(theme) {
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch (error) {
+    // Theme still applies for the current page even when storage is unavailable.
+  }
+}
+
+function setTheme(theme, shouldStore = true) {
+  const nextTheme = theme === "dark" ? "dark" : "light";
+  const isDark = nextTheme === "dark";
+  const themeLabel = isDark ? "Light Mode" : "Dark Mode";
+
+  document.documentElement.dataset.theme = nextTheme;
+
+  elements.themeToggles.forEach((toggle) => {
+    toggle.setAttribute("aria-label", isDark ? "Ganti ke light mode" : "Ganti ke dark mode");
+  });
+
+  elements.themeLabels.forEach((label) => {
+    label.textContent = themeLabel;
+  });
+
+  if (shouldStore) {
+    saveStoredTheme(nextTheme);
+  }
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  setTheme(currentTheme === "dark" ? "light" : "dark");
 }
 
 function formatCurrencyInput(input) {
@@ -422,6 +467,10 @@ elements.saveFees.addEventListener("click", () => {
 
 elements.toastClose.addEventListener("click", hideToast);
 
+elements.themeToggles.forEach((toggle) => {
+  toggle.addEventListener("click", toggleTheme);
+});
+
 elements.mobileMenuToggle.addEventListener("click", (event) => {
   event.stopPropagation();
   const isOpen = elements.mobileMenuToggle.getAttribute("aria-expanded") === "true";
@@ -506,6 +555,7 @@ elements.form.addEventListener("submit", (event) => {
 });
 
 savedFees = loadStoredFees();
+setTheme(loadStoredTheme(), false);
 syncFeeInputs(savedFees);
 updateFeeChips(savedFees);
 setPrimaryMode(false);

@@ -7,10 +7,27 @@
     <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/icon-app.png">
     <title>Kalkulator Shopee</title>
-    <link rel="stylesheet" href="style.css?v=mobile-app-10">
+    <script>
+        (() => {
+            try {
+                const theme = localStorage.getItem("shopeeCalculatorTheme");
+                if (theme === "dark" || theme === "light") {
+                    document.documentElement.dataset.theme = theme;
+                }
+            } catch (error) {
+                document.documentElement.dataset.theme = "light";
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="style.css?v=mobile-app-11">
 </head>
 
 <body>
+    <button class="theme-action desktop-theme-action" type="button" aria-label="Ganti ke dark mode" data-theme-toggle>
+        <span class="theme-action-label" data-theme-label>Dark Mode</span>
+        <span class="theme-action-icon" aria-hidden="true"></span>
+    </button>
+
     <main class="container">
         <header class="app-header">
             <img src="assets/icon.png" alt="" class="app-icon" aria-hidden="true">
@@ -27,6 +44,11 @@
                     <div class="mobile-menu-heading">Menu</div>
                     <button class="mobile-menu-close" id="mobile-menu-close" type="button" aria-label="Tutup menu">&times;</button>
                 </div>
+                <button class="mobile-menu-item mobile-theme-action" type="button" aria-label="Ganti ke dark mode"
+                    data-theme-toggle>
+                    <span class="theme-action-icon" aria-hidden="true"></span>
+                    <span data-theme-label>Dark Mode</span>
+                </button>
                 <button class="mobile-menu-item" id="reset-form" type="button">
                     <svg class="mobile-menu-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M4 7v5h5" />
@@ -162,7 +184,7 @@
         © 2026 Dibuat oleh <a href="https://wahyu-devs.github.io/portfolio/"><b>Wahyu</b></a>
     </footer>
 
-    <script src="script.js?v=mobile-app-6"></script>
+    <script src="script.js?v=mobile-app-7"></script>
 </body>
 
 </html>
