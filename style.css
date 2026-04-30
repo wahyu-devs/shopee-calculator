@@ -1533,25 +1533,14 @@ a {
 
     .primary-button {
         min-height: 52px;
-        margin-top: 2px;
+        margin-top: 0;
         font-size: 0.94rem;
         font-weight: 700;
         box-shadow: 0 8px 18px var(--button-shadow);
     }
 
     .empty-state {
-        display: grid;
-        flex: 1 1 auto;
-        min-height: 168px;
-        place-items: center;
-        margin: 0 -20px;
-        padding: 18px 20px;
-        background: var(--surface);
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-        border-radius: 0;
-        color: var(--muted);
-        text-align: center;
+        display: none;
     }
 
     .empty-state-content {
@@ -1585,7 +1574,7 @@ a {
     }
 
     .seo-disclosure {
-        margin: 0 -20px;
+        margin: 14px -20px 0;
     }
 
     .seo-disclosure summary {
