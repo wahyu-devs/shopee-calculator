@@ -101,6 +101,7 @@ html[data-theme="dark"] {
 html {
     min-height: 100%;
     background: var(--bg);
+    overflow-x: clip;
 }
 
 body {
@@ -1110,6 +1111,7 @@ a {
         border: 0;
         border-radius: 0;
         box-shadow: none;
+        overflow-x: clip;
     }
 
     #calculator-form {
