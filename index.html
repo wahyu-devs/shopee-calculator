@@ -4,9 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Hitung harga jual Shopee dari target uang bersih setelah biaya admin, layanan, dan proses pesanan. Gratis, cepat, dan bisa ubah asumsi biaya.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#ff5722">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:title" content="Kalkulator Harga Jual Shopee Gratis">
+    <meta property="og:description" content="Bantu seller menghitung harga jual minimum agar target uang bersih tetap tercapai setelah potongan biaya Shopee.">
+    <meta property="og:url" content="https://shopee-calc.vercel.app/">
+    <meta property="og:site_name" content="Kalkulator Harga Jual Shopee">
+    <meta property="og:image" content="https://shopee-calc.vercel.app/assets/icon-app.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Kalkulator Harga Jual Shopee Gratis">
+    <meta name="twitter:description" content="Hitung harga jual Shopee dari target uang bersih setelah biaya admin, layanan, dan proses pesanan.">
+    <link rel="canonical" href="https://shopee-calc.vercel.app/">
     <link rel="shortcut icon" href="assets/icon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/icon-app.png">
-    <title>Kalkulator Shopee</title>
+    <title>Kalkulator Harga Jual Shopee Gratis | Hitung Target Uang Bersih Seller</title>
     <script>
         (() => {
             try {
@@ -19,7 +33,36 @@
             }
         })();
     </script>
-    <link rel="stylesheet" href="style.css?v=mobile-app-11">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            "name": "Kalkulator Harga Jual Shopee",
+            "url": "https://shopee-calc.vercel.app/",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Any",
+            "inLanguage": "id-ID",
+            "browserRequirements": "Requires JavaScript and a modern web browser",
+            "isAccessibleForFree": true,
+            "description": "Aplikasi web gratis untuk membantu seller menghitung harga jual minimum Shopee agar target uang bersih tetap tercapai setelah potongan biaya.",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "IDR"
+            },
+            "featureList": [
+                "Hitung harga jual minimum dari target uang bersih",
+                "Ubah asumsi biaya admin, layanan, dan proses pesanan",
+                "Salin hasil harga jual dengan cepat"
+            ],
+            "creator": {
+                "@type": "Person",
+                "name": "Wahyu",
+                "url": "https://wahyu-devs.github.io/portfolio/"
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css?v=seo-1">
 </head>
 
 <body>
@@ -151,6 +194,77 @@
             </section>
             <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
         </form>
+
+        <details class="seo-disclosure">
+            <summary>Lihat Panduan Seller</summary>
+            <section class="seo-content" aria-labelledby="seo-content-title">
+                <div class="seo-content-header">
+                    <h2 id="seo-content-title">Kalkulator Harga Jual Shopee untuk Seller</h2>
+                    <p>
+                        Tool ini membantu menghitung harga jual minimum agar target uang bersih tetap tercapai setelah
+                        biaya admin, biaya layanan, dan biaya proses pesanan dipotong dari harga jual.
+                    </p>
+                    <p class="seo-note">
+                        Asumsi biaya default di halaman ini bisa diubah sesuai skema tokomu. Selalu cocokkan lagi dengan
+                        biaya terbaru yang berlaku di Seller Center atau pengumuman resmi Shopee.
+                    </p>
+                </div>
+
+                <section class="seo-block" aria-labelledby="cara-pakai-title">
+                    <h3 id="cara-pakai-title">Cara Pakai</h3>
+                    <ol>
+                        <li>Masukkan target uang bersih yang ingin kamu terima.</li>
+                        <li>Sesuaikan biaya admin, layanan, dan proses jika skema tokomu berbeda.</li>
+                        <li>Tekan tombol hitung untuk melihat harga jual minimum yang disarankan.</li>
+                        <li>Periksa hasil simulasi potongan sebelum memasang harga di Shopee.</li>
+                    </ol>
+                </section>
+
+                <section class="seo-block" aria-labelledby="rumus-title">
+                    <h3 id="rumus-title">Rumus Singkat</h3>
+                    <p>
+                        Secara sederhana, harga jual minimum dihitung dari target bersih ditambah biaya tetap, lalu dibagi
+                        dengan sisa persentase setelah biaya admin dan layanan.
+                    </p>
+                    <p class="seo-formula">Harga jual minimum = (target bersih + biaya proses) / (1 - admin - layanan)</p>
+                </section>
+
+                <section class="seo-block" aria-labelledby="penyesuaian-title">
+                    <h3 id="penyesuaian-title">Kapan Hasil Perlu Disesuaikan</h3>
+                    <ul>
+                        <li>Saat produk ikut promo, voucher toko, atau subsidi diskon yang ditanggung seller.</li>
+                        <li>Saat kamu ingin memasukkan HPP, target profit, biaya packing, atau biaya iklan.</li>
+                        <li>Saat kategori produk atau program toko punya potongan biaya yang berbeda.</li>
+                        <li>Saat ada perubahan kebijakan biaya dari Shopee.</li>
+                    </ul>
+                </section>
+
+                <section class="seo-block" aria-labelledby="faq-title">
+                    <h3 id="faq-title">Pertanyaan Umum</h3>
+                    <div class="faq-item">
+                        <h4>Apakah kalkulator ini cocok untuk semua seller Shopee?</h4>
+                        <p>
+                            Cocok sebagai acuan awal. Namun hasil akhir tetap perlu disesuaikan dengan kategori produk,
+                            program toko, voucher, iklan, dan kebijakan biaya yang aktif di akunmu.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Kenapa harga jual minimum bisa lebih tinggi dari perkiraan?</h4>
+                        <p>
+                            Karena potongan biaya dihitung dari harga jual. Makin tinggi persentase biaya, makin besar
+                            harga yang dibutuhkan untuk menjaga uang bersih tetap aman.
+                        </p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Apakah hasil ini sudah termasuk HPP dan profit?</h4>
+                        <p>
+                            Belum. Kalkulator ini fokus pada target uang bersih setelah potongan platform. Kalau kamu ingin
+                            menghitung margin penuh, tambahkan HPP dan target profit ke nominal target bersihmu.
+                        </p>
+                    </div>
+                </section>
+            </section>
+        </details>
     </main>
 
     <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden>

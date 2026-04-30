@@ -764,6 +764,149 @@ input:focus {
     display: none;
 }
 
+.seo-disclosure {
+    margin-top: 26px;
+}
+
+.seo-disclosure summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.4;
+    list-style: none;
+}
+
+.seo-disclosure summary::-webkit-details-marker {
+    display: none;
+}
+
+.seo-disclosure summary::after {
+    content: "+";
+    flex: 0 0 auto;
+    color: var(--accent);
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.seo-disclosure[open] summary {
+    border-color: var(--accent-line);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.seo-disclosure[open] summary::after {
+    content: "-";
+}
+
+.seo-disclosure summary:hover {
+    border-color: var(--accent);
+}
+
+.seo-disclosure summary:focus-visible {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px var(--focus-ring);
+    outline: none;
+}
+
+.seo-content {
+    margin-top: 0;
+    padding: 20px 18px 18px;
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.seo-content-header {
+    display: grid;
+    gap: 10px;
+}
+
+.seo-content h2,
+.seo-content h3,
+.seo-content h4 {
+    margin: 0;
+    color: var(--ink);
+}
+
+.seo-content h2 {
+    font-size: 1rem;
+    line-height: 1.35;
+}
+
+.seo-content h3 {
+    font-size: 0.94rem;
+    line-height: 1.35;
+}
+
+.seo-content h4 {
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.seo-content p,
+.seo-content li {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.seo-content p {
+    margin: 0;
+}
+
+.seo-note {
+    font-size: 0.84rem;
+}
+
+.seo-block {
+    display: grid;
+    gap: 10px;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+}
+
+.seo-content ol,
+.seo-content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.seo-formula {
+    padding: 12px;
+    background: var(--surface-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink) !important;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.faq-item {
+    display: grid;
+    gap: 8px;
+}
+
+.faq-item + .faq-item {
+    margin-top: 2px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+}
+
 footer {
     margin-top: 14px;
     color: var(--footer);
@@ -834,6 +977,7 @@ a {
         margin-top: 14px;
         padding: 9px 12px;
     }
+
 }
 
 @media (max-width: 700px) {
@@ -1335,6 +1479,64 @@ a {
         font-size: 0.88rem;
         font-weight: 700;
         line-height: 1.45;
+    }
+
+    .seo-disclosure {
+        margin: 0 -20px;
+    }
+
+    .seo-disclosure summary {
+        min-height: 52px;
+        padding: 14px 20px;
+        background: var(--surface);
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+    }
+
+    .seo-disclosure[open] summary {
+        border-right: 0;
+        border-left: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .seo-content {
+        margin: 0;
+        padding: 18px 20px calc(20px + env(safe-area-inset-bottom));
+        background: var(--surface);
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        border-left: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .seo-content h2 {
+        font-size: 0.98rem;
+    }
+
+    .seo-content h3 {
+        font-size: 0.92rem;
+    }
+
+    .seo-content p,
+    .seo-content li {
+        font-size: 0.89rem;
+    }
+
+    .seo-note {
+        font-size: 0.82rem;
+    }
+
+    .seo-block {
+        margin-top: 16px;
+        padding-top: 16px;
+    }
+
+    .seo-formula {
+        padding: 11px 12px;
+        font-size: 0.88rem;
     }
 
     footer {
