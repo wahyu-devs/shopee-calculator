@@ -53,6 +53,7 @@ let toastTimer = 0;
 let toastHideTimer = 0;
 let lastToastMessage = "";
 let mobileMenuCloseTimer = 0;
+let lastAboutTrigger = null;
 
 function setMobileMenuOpen(isOpen) {
   const shouldOpen = isOpen && window.matchMedia("(max-width: 700px)").matches;
@@ -89,6 +90,21 @@ function setMobileMenuOpen(isOpen) {
 
 function setAboutModalOpen(isOpen) {
   elements.aboutModal.hidden = !isOpen;
+}
+
+function openAboutModal(trigger = null) {
+  lastAboutTrigger = trigger;
+  setAboutModalOpen(true);
+}
+
+function closeAboutModal() {
+  setAboutModalOpen(false);
+
+  if (lastAboutTrigger && typeof lastAboutTrigger.focus === "function") {
+    lastAboutTrigger.focus();
+  }
+
+  lastAboutTrigger = null;
 }
 
 function formatRupiah(value) {
@@ -492,7 +508,7 @@ elements.mobileMenuClose.addEventListener("click", () => {
 
 elements.openAbout.addEventListener("click", () => {
   setMobileMenuOpen(false);
-  setAboutModalOpen(true);
+  openAboutModal(elements.mobileMenuToggle);
 });
 
 elements.resetForm.addEventListener("click", () => {
@@ -501,13 +517,12 @@ elements.resetForm.addEventListener("click", () => {
 });
 
 elements.aboutModalClose.addEventListener("click", () => {
-  setAboutModalOpen(false);
-  elements.mobileMenuToggle.focus();
+  closeAboutModal();
 });
 
 elements.aboutModal.addEventListener("click", (event) => {
   if (event.target === elements.aboutModal) {
-    setAboutModalOpen(false);
+    closeAboutModal();
   }
 });
 
@@ -517,8 +532,7 @@ elements.aboutModal.querySelector(".about-modal-panel").addEventListener("click"
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !elements.aboutModal.hidden) {
-    setAboutModalOpen(false);
-    elements.mobileMenuToggle.focus();
+    closeAboutModal();
     return;
   }
 

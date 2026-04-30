@@ -1017,6 +1017,10 @@ footer {
     text-align: center;
 }
 
+footer a {
+    margin-left: 0.2em;
+}
+
 .heart-icon {
     width: 1.08em;
     height: 1.08em;
@@ -1109,7 +1113,7 @@ a {
     }
 
     #calculator-form {
-        flex: 1;
+        flex: 0 0 auto;
         gap: 14px;
     }
 
@@ -1667,7 +1671,15 @@ a {
     }
 
     footer {
-        display: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 54px;
+        margin: 0 -20px;
+        padding: 10px 20px calc(12px + env(safe-area-inset-bottom));
+        background: var(--surface);
+        border-top: 1px solid var(--line);
+        line-height: 1.5;
     }
 
     .toast {
