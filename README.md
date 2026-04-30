@@ -2,6 +2,8 @@
 
 This is a simple responsive web app built with **HTML, CSS, and JavaScript** to help sellers calculate the correct product price to post on **Shopee**. It ensures that sellers still receive their desired net amount after Shopee's deductions.
 
+Try the live app here: https://shopee-calc.vercel.app/
+
 ## Features
 - Input desired net price in Indonesian Rupiah.
 - Automatic formatting with thousands separator.
@@ -24,7 +26,8 @@ This is a simple responsive web app built with **HTML, CSS, and JavaScript** to 
 4. Copy the final selling price when the result appears.
 
 ## Demo
-Just open the `index.html` file in your browser.
+- Live app: https://shopee-calc.vercel.app/
+- Local demo: open `index.html` in your browser.
 
 ## Author
 © 2026 Wahyu
