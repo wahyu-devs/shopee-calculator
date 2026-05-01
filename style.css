@@ -1106,7 +1106,7 @@ a {
         flex-direction: column;
         width: 100%;
         max-width: none;
-        padding: 0 20px 14px;
+        padding: calc(80px + env(safe-area-inset-top)) 20px 14px;
         background: var(--bg);
         border: 0;
         border-radius: 0;
@@ -1120,16 +1120,19 @@ a {
     }
 
     .app-header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         z-index: 4;
         align-items: center;
         justify-content: flex-start;
         gap: 10px;
-        margin: 0 -20px 14px;
+        margin: 0;
         padding: calc(14px + env(safe-area-inset-top)) 20px 14px;
         background: var(--surface);
         border-bottom: 1px solid var(--line);
+        box-shadow: 0 6px 18px var(--shadow);
     }
 
     .app-icon {
